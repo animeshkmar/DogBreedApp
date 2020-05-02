@@ -11,27 +11,8 @@ import UIKit
 class BreedListVC: UIViewController {
 
     var tableView: UITableView              = UITableView()
-    var breedDataSet: [String: [String]]    = Services().fetchListOfBreeds()
-    
-    lazy var breedList = { () -> [String] in
-        // Extract All Breed Names
-        var breeds: [String] = []
-        for item in self.breedDataSet.keys {
-            breeds.append(item)
-        }
-        
-        // Arrange alphabetically
-        breeds = breeds.sorted(by: {$0 < $1})
-        
-        return breeds
-    }()
-    
-    lazy var subBreedList = { (breedName: String) -> [String] in
-        var subBreeds: [String] = []
-        subBreeds = self.breedDataSet[breedName] ?? [""]
-        subBreeds = subBreeds.sorted(by: {$0 < $1})
-        return subBreeds
-    }
+    static var searchFilter: String         = ""
+    var breedList: [String]                 = BreedData.fullBreedList(BreedListVC.searchFilter)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +24,18 @@ class BreedListVC: UIViewController {
         
         view.addSubview(tableView)
         
-        tableView.delegate              = self
-        tableView.dataSource            = self
+        tableView.delegate                      = self
+        tableView.dataSource                    = self
         
-        tableView.estimatedRowHeight    = 80
-        tableView.rowHeight             = UITableView.automaticDimension
+        tableView.estimatedRowHeight            = 80
+        tableView.estimatedSectionHeaderHeight  = 80
+        tableView.rowHeight                     = UITableView.automaticDimension
         
         tableView.register(BreedListCell.self, forCellReuseIdentifier: "BreedListCell")
+        tableView.register(BreedListHeaderVC.self, forHeaderFooterViewReuseIdentifier: "BreadListHeader")
+        
+        // Dismiss Search Keyboard When User Continues To Browse List
+        tableView.keyboardDismissMode = .onDrag
         
         setTableViewConstraints()
         
@@ -68,38 +54,56 @@ class BreedListVC: UIViewController {
 
 extension BreedListVC: UITableViewDelegate, UITableViewDataSource {
     
+    // HEADER
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BreadListHeader") as! BreedListHeaderVC
+        header.updateBreedListDelegate = self
+        header.configHeader()
+        return header
+    }
+    
+    // CELLS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return breedList.count
+        return self.breedList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell        = tableView.dequeueReusableCell(withIdentifier: "BreedListCell") as! BreedListCell
-        let cellContent = breedList[indexPath.row]
+        let cellContent = self.breedList[indexPath.row]
         cell.configCell(content: cellContent)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let selectedBreed: String   = breedList[indexPath.row]
-        let subBreed: [String] = subBreedList(selectedBreed)
-        
+        let selectedBreed: String   = self.breedList[indexPath.row]
+        let subBreed: [String]      = BreedData.fullSubBreedList(selectedBreed)
+
         if subBreed.isEmpty {
-            
+
             //Navigate to Breed Gallery Screen
             let destination = GalleryVC()
             destination.breedName = selectedBreed
             self.navigationController?.pushViewController(destination, animated: true)
-            
+
         } else {
-            
+
             // Navigate to SubBreed Screen
             let destination             = SubBreedListVC()
             destination.breedName       = selectedBreed
             destination.subBreedList    = subBreed
             self.navigationController?.pushViewController(destination, animated: true)
-            
+
         }
     }
 }
 
+extension BreedListVC: UpdateBreedListDelegate {
+    func didFinishSearching() {
+        breedList = BreedData.fullBreedList(BreedListVC.searchFilter)
+        DispatchQueue.main.async{
+            self.tableView.reloadData()
+        }
+        print("Done!")
+    }
+}

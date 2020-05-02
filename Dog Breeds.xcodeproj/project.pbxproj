@@ -20,6 +20,8 @@
 		7258C5D2244FFD35007D6C8C /* GalleryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7258C5D1244FFD35007D6C8C /* GalleryVC.swift */; };
 		7258C5D424506A20007D6C8C /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7258C5D324506A20007D6C8C /* ImageCell.swift */; };
 		7258C5D724520E9E007D6C8C /* ImageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7258C5D624520E9E007D6C8C /* ImageDetailVC.swift */; };
+		7258C5D9245D1B28007D6C8C /* BreedListHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7258C5D8245D1B27007D6C8C /* BreedListHeaderVC.swift */; };
+		7258C5DD245D8470007D6C8C /* BreedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7258C5DC245D8470007D6C8C /* BreedData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		7258C5D1244FFD35007D6C8C /* GalleryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryVC.swift; sourceTree = "<group>"; };
 		7258C5D324506A20007D6C8C /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		7258C5D624520E9E007D6C8C /* ImageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailVC.swift; sourceTree = "<group>"; };
+		7258C5D8245D1B27007D6C8C /* BreedListHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedListHeaderVC.swift; sourceTree = "<group>"; };
+		7258C5DC245D8470007D6C8C /* BreedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,7 @@
 				7258C5D524520E70007D6C8C /* ImageDetailScreen */,
 				7258C5C3244F3605007D6C8C /* ReusableUIComponents */,
 				7258C5C8244F3636007D6C8C /* Services */,
+				7258C5DE245D89A6007D6C8C /* Data */,
 				7258C5AD244F2C92007D6C8C /* Assets.xcassets */,
 				7258C5AF244F2C92007D6C8C /* LaunchScreen.storyboard */,
 				7258C5B2244F2C92007D6C8C /* Info.plist */,
@@ -90,6 +95,7 @@
 			children = (
 				7258C5BA244F2E50007D6C8C /* BreedListVC.swift */,
 				7258C5BC244F3236007D6C8C /* BreedListCell.swift */,
+				7258C5D8245D1B27007D6C8C /* BreedListHeaderVC.swift */,
 			);
 			path = BreedListScreen;
 			sourceTree = "<group>";
@@ -134,6 +140,14 @@
 				7258C5D624520E9E007D6C8C /* ImageDetailVC.swift */,
 			);
 			path = ImageDetailScreen;
+			sourceTree = "<group>";
+		};
+		7258C5DE245D89A6007D6C8C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7258C5DC245D8470007D6C8C /* BreedData.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,10 +226,12 @@
 				7258C5A5244F2C8E007D6C8C /* AppDelegate.swift in Sources */,
 				7258C5BB244F2E50007D6C8C /* BreedListVC.swift in Sources */,
 				7258C5C1244F32DE007D6C8C /* Label.swift in Sources */,
+				7258C5DD245D8470007D6C8C /* BreedData.swift in Sources */,
 				7258C5CD244F8485007D6C8C /* SubBreedListVC.swift in Sources */,
 				7258C5D2244FFD35007D6C8C /* GalleryVC.swift in Sources */,
 				7258C5D724520E9E007D6C8C /* ImageDetailVC.swift in Sources */,
 				7258C5A7244F2C8E007D6C8C /* SceneDelegate.swift in Sources */,
+				7258C5D9245D1B28007D6C8C /* BreedListHeaderVC.swift in Sources */,
 				7258C5D424506A20007D6C8C /* ImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -64,5 +64,4 @@ extension SubBreedListVC: UITableViewDelegate, UITableViewDataSource {
         destination.subBreedName    = selectedSubBreed
         self.navigationController?.pushViewController(destination, animated: true)
     }
-    
 }
