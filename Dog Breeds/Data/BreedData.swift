@@ -27,11 +27,21 @@ struct BreedData {
             breeds = breeds.sorted(by: {$0 < $1})
             return breeds
         }else{
-            if let item = breedDataSet.keys.first(where: {$0 == searchText.lowercased()}) {
-                breeds.append(item)
+            
+            // Split the keyword to get an array of comprising alphabets
+            let searchTextArray = Array(searchText.lowercased())
+            
+            for item in breedDataSet.keys {
+                let itemArray = Array(item)
+                if itemArray.starts(with: searchTextArray) {
+                    breeds.append(item)
+                }
+            }
+            
+            if !breeds.isEmpty {
                 return breeds
-            } else {
-               return ["No results found"]
+            }else{
+                return ["No results found"]
             }
         }
     }
